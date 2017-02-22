@@ -2,14 +2,6 @@ html, body, div {
     /* Height and width fallback for older browsers. */
     height: 100%;
     width: 100%;
-
-    /* Set the height to match that of the viewport. */
-    height: 100vh;
-
-    /* Set the width to match that of the viewport. */
-    width: 100vw;
-
-    /* Remove any browser-default margins. */
 }
 
 html {
@@ -20,18 +12,14 @@ html {
   background: lime;
 }
 
-p {
-  color: orange;
-}
-
 .row {
   height:50%;
-  background: yellow;
+  background: orange;
 }
 
 .col-md-8 {
   height: 100%;
-  background: blue;
+  background: lightgrey;
 }
 
 img {
