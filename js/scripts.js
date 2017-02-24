@@ -11,16 +11,16 @@ var displayNumberList = function (list) {
   for (var j=0; j<list.length; j++){
 
     var numberToScreen = list[j];
-    var originalNumber = '<span class="original">'+j+"</span>"
+    var originalNumber = '<span class="original">'+(j+1)+"</span>"
     console.log(numberToScreen);
-  $("#results").append("<h2>"+originalNumber+" "+numberToScreen+"<h2>");
+  $("#results").append("<h4>"+originalNumber+" "+numberToScreen+"<h4>").hide().fadeIn();
   };
 };
 
 var find15 = function (){
   for (var j=0; j<resultArray.length; j++){
     if (Number.isInteger(resultArray[j]/15)) {
-      resultArray.splice(j,1,"ping pong");
+      resultArray.splice(j,1,"ping-pong");
     }
   };
 };
