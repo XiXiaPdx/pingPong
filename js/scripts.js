@@ -2,67 +2,57 @@
 var resultArray = [];
 var testArray =[""];
 
-//global functions
+//business logic
+
+//takes initial number and makes it into an array list. Each array element is an array of 2. Index zero is the number, index 1 will contact the grid display control class.
 var makeNumberList = function (number) {
   resultArray=[];
   for (var i=1; i<=number; i++) {
-  resultArray.push([i,'<div class="grid">']);
+    resultArray.push([i,'<div class="grid">']);
   }
-  console.log(resultArray);
 };
 
+//After finding multiples and modifying resultArray, this will display it in grid format. Each array element is a 18% width div that floats left.  Number and ping, pong, ping-pong are added. Colors for certain grids are different based on class control.
 var displayNumberList = function (list) {
-    $("#results").empty();
+  $("#displayArray").empty();
+  $("#numberList").trigger("reset");
   for (var j=0; j<list.length; j++){
     var numberToScreen = list[j][0];
     var gridClass= list[j][1];
     var originalNumber = '<span class="original">'+(j+1)+"</span>"
-    $("#displayArray").append(gridClass+originalNumber+" "+numberToScreen+"</div>").hide().fadeIn();
+    $("#displayArray").append(gridClass+" "+numberToScreen+"</div>").hide().fadeIn();
   };
 };
 
-var find15 = function (){
+//The results array is processed for first multiples of 15, then 5, then 3, and finally if not a multiple, modified with span element to control text display.
+var findMultiples = function (){
   for (var j=0; j<resultArray.length; j++){
     if (Number.isInteger((resultArray[j][0])/15)) {
       resultArray[j].splice(0,1,'<span class="pingPong">'+"ping-pong"+'</span>');
       resultArray[j].splice(1,1,'<div class="grid gridPingPong">');
     }
+    else if(Number.isInteger((resultArray[j][0])/5)) {
+      resultArray[j].splice(0,1,'<span class="pingPong">'+"pong"+'</span>');
+      resultArray[j].splice(1,1,'<div class="grid gridPong">');
+    }
+    else if(Number.isInteger((resultArray[j][0])/3)) {
+      resultArray[j].splice(0,1,'<span class="pingPong">'+"pong"+'</span>');
+      resultArray[j].splice(1,1,'<div class="grid gridPing">');
+    }
+    else  {
+      resultArray[j].splice(0,1,'<span class="original">'+resultArray[j][0]+'</span>');
+      resultArray[j].splice(1,1,'<div class="grid">');
+    }
   };
 };
 
-var find5 = function (){
-  for (var j=0; j<resultArray.length; j++){
-    if (Number.isInteger((resultArray[j][0])/5)) {
-      resultArray[j].splice(0,1,'<span class="Pong">'+"pong"+'</span>');
-      resultArray[j].splice(1,1,'<div class="grid gridPong">');
-    }
-  };
-  };
-
-var find3 = function (){
-  for (var j=0; j<resultArray.length; j++){
-    if (Number.isInteger((resultArray[j][0])/3)) {
-      resultArray[j].splice(0,1,'<span class="Ping">'+"pong"+'</span>');
-      resultArray[j].splice(1,1,'<div class="grid gridPing">');
-    }
-  };
-  };
-
-
+//front end logic
 $(document).ready(function (){
   $("#numberList").submit(function(event) {
     event.preventDefault();
-    // make array inside Array
-    var testArray = [[1,2]];
-    testArray[0].splice(1,1,"ping-pong");
-    console.log (testArray);
-
     var inputNumber = parseInt($("input#numbers").val());
     makeNumberList(inputNumber);
-    find15();
-    find5();
-    find3();
+    findMultiples();
     displayNumberList(resultArray);
-    $("#numberList").trigger("reset");
   });
 });
