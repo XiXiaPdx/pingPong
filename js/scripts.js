@@ -1,4 +1,8 @@
+//global variables
 var resultArray = [];
+var testArray =[""];
+
+//global functions
 var makeNumberList = function (number) {
   resultArray=[];
   for (var i=1; i<=number; i++) {
@@ -12,8 +16,7 @@ var displayNumberList = function (list) {
 
     var numberToScreen = list[j];
     var originalNumber = '<span class="original">'+(j+1)+"</span>"
-    console.log(numberToScreen);
-  $("#results").append("<h4>"+originalNumber+" "+numberToScreen+"<h4>").hide().fadeIn();
+    $("#results").append("<h4>"+originalNumber+" "+numberToScreen+"<h4>").hide().fadeIn();
   };
 };
 
@@ -45,6 +48,15 @@ var find3 = function (){
 $(document).ready(function (){
   $("#numberList").submit(function(event) {
     event.preventDefault();
+    // display Array test
+    console.log(testArray.length);
+    for (var a=1;a<13;a++){
+    $("#displayArray").append('<div class="grid">'+testArray[0]+"</div>");
+    };
+
+
+
+
     var inputNumber = parseInt($("input#numbers").val());
     makeNumberList(inputNumber);
     find15();
