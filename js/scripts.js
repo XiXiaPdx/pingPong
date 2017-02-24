@@ -17,6 +17,7 @@ var displayNumberList = function (list) {
     var numberToScreen = list[j];
     var originalNumber = '<span class="original">'+(j+1)+"</span>"
 // display Array test
+// 4 grid types, grid, gridPing,gridPong,gridPingPong
 
 
     $("#displayArray").append('<div class="grid">'+originalNumber+" "+numberToScreen+"</div>").hide().fadeIn();
@@ -54,6 +55,12 @@ var find3 = function (){
 $(document).ready(function (){
   $("#numberList").submit(function(event) {
     event.preventDefault();
+    // make array inside Array
+    var testArray = [[1,2]];
+    console.log(testArray[0] [1]);
+    testArray.push([3,4]);
+    console.log (testArray);
+
     var inputNumber = parseInt($("input#numbers").val());
     makeNumberList(inputNumber);
     find15();
