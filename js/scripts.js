@@ -6,7 +6,7 @@ var testArray =[""];
 var makeNumberList = function (number) {
   resultArray=[];
   for (var i=1; i<=number; i++) {
-  resultArray.push([i,""]);
+  resultArray.push([i,'<div class="grid">']);
   }
   console.log(resultArray);
 };
@@ -22,7 +22,7 @@ var displayNumberList = function (list) {
 // 4 grid types, grid, gridPing,gridPong,gridPingPong
 
 
-    $("#displayArray").append('<div class="grid">'+originalNumber+" "+numberToScreen+"</div>").hide().fadeIn();
+    $("#displayArray").append(gridClass+originalNumber+" "+numberToScreen+"</div>").hide().fadeIn();
 
 
 
@@ -31,8 +31,9 @@ var displayNumberList = function (list) {
 
 var find15 = function (){
   for (var j=0; j<resultArray.length; j++){
-    if (Number.isInteger(resultArray[j]/15)) {
-      resultArray.splice(j,1,'<span class="pingPong">'+"ping-pong"+'</span>');
+    if (Number.isInteger((resultArray[j][0])/15)) {
+      resultArray[j].splice(0,1,'<span class="pingPong">'+"ping-pong"+'</span>');
+      resultArray[j].splice(1,1,'<div class="grid gridPingPong">');
     }
   };
 };
@@ -59,8 +60,7 @@ $(document).ready(function (){
     event.preventDefault();
     // make array inside Array
     var testArray = [[1,2]];
-    console.log(testArray[0] [1]);
-    testArray.push([3,4]);
+    testArray[0].splice(1,1,"ping-pong");
     console.log (testArray);
 
     var inputNumber = parseInt($("input#numbers").val());
