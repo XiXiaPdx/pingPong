@@ -6,15 +6,17 @@ var testArray =[""];
 var makeNumberList = function (number) {
   resultArray=[];
   for (var i=1; i<=number; i++) {
-  resultArray.push(i);
+  resultArray.push([i,""]);
   }
+  console.log(resultArray);
 };
 
 var displayNumberList = function (list) {
     $("#results").empty();
   for (var j=0; j<list.length; j++){
 
-    var numberToScreen = list[j];
+    var numberToScreen = list[j][0];
+    var gridClass= list[j][1];
     var originalNumber = '<span class="original">'+(j+1)+"</span>"
 // display Array test
 // 4 grid types, grid, gridPing,gridPong,gridPingPong
