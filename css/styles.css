@@ -63,3 +63,11 @@ img {
 .gridPingPong {
   background-color: lightblue;
 }
+
+.gridPong {
+  background-color: pink;
+}
+
+.gridPing {
+  background-color: yellow;
+}

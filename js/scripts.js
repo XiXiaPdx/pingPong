@@ -14,18 +14,10 @@ var makeNumberList = function (number) {
 var displayNumberList = function (list) {
     $("#results").empty();
   for (var j=0; j<list.length; j++){
-
     var numberToScreen = list[j][0];
     var gridClass= list[j][1];
     var originalNumber = '<span class="original">'+(j+1)+"</span>"
-// display Array test
-// 4 grid types, grid, gridPing,gridPong,gridPingPong
-
-
     $("#displayArray").append(gridClass+originalNumber+" "+numberToScreen+"</div>").hide().fadeIn();
-
-
-
   };
 };
 
@@ -40,19 +32,21 @@ var find15 = function (){
 
 var find5 = function (){
   for (var j=0; j<resultArray.length; j++){
-    if (Number.isInteger(resultArray[j]/5)) {
-      resultArray.splice(j,1,'<span class="pong">'+"pong"+'</span>');
+    if (Number.isInteger((resultArray[j][0])/5)) {
+      resultArray[j].splice(0,1,'<span class="Pong">'+"pong"+'</span>');
+      resultArray[j].splice(1,1,'<div class="grid gridPong">');
     }
   };
-};
+  };
 
 var find3 = function (){
   for (var j=0; j<resultArray.length; j++){
-    if (Number.isInteger(resultArray[j]/3)) {
-      resultArray.splice(j,1,'<span class="ping">'+"ping"+'</span>');
+    if (Number.isInteger((resultArray[j][0])/3)) {
+      resultArray[j].splice(0,1,'<span class="Ping">'+"pong"+'</span>');
+      resultArray[j].splice(1,1,'<div class="grid gridPing">');
     }
   };
-};
+  };
 
 
 $(document).ready(function (){
