@@ -45,6 +45,17 @@ img {
   background-color: white;
 }
 
-.original {
-  color: black;
+.ping {
+  color: red;
+  font-size: 20px;
+}
+
+.pong {
+  color: blue;
+  font-size: 20px;
+}
+
+.pingPong {
+  color: green;
+  font-size: 20px;
 }

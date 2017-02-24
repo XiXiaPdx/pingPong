@@ -16,14 +16,20 @@ var displayNumberList = function (list) {
 
     var numberToScreen = list[j];
     var originalNumber = '<span class="original">'+(j+1)+"</span>"
-    $("#results").append("<h4>"+originalNumber+" "+numberToScreen+"<h4>").hide().fadeIn();
+// display Array test
+
+
+    $("#displayArray").append('<div class="grid">'+originalNumber+" "+numberToScreen+"</div>").hide().fadeIn();
+
+
+
   };
 };
 
 var find15 = function (){
   for (var j=0; j<resultArray.length; j++){
     if (Number.isInteger(resultArray[j]/15)) {
-      resultArray.splice(j,1,"ping-pong");
+      resultArray.splice(j,1,'<span class="pingPong">'+"ping-pong"+'</span>');
     }
   };
 };
@@ -31,7 +37,7 @@ var find15 = function (){
 var find5 = function (){
   for (var j=0; j<resultArray.length; j++){
     if (Number.isInteger(resultArray[j]/5)) {
-      resultArray.splice(j,1,"pong");
+      resultArray.splice(j,1,'<span class="pong">'+"pong"+'</span>');
     }
   };
 };
@@ -39,7 +45,7 @@ var find5 = function (){
 var find3 = function (){
   for (var j=0; j<resultArray.length; j++){
     if (Number.isInteger(resultArray[j]/3)) {
-      resultArray.splice(j,1,"ping");
+      resultArray.splice(j,1,'<span class="ping">'+"ping"+'</span>');
     }
   };
 };
@@ -48,15 +54,6 @@ var find3 = function (){
 $(document).ready(function (){
   $("#numberList").submit(function(event) {
     event.preventDefault();
-    // display Array test
-    console.log(testArray.length);
-    for (var a=1;a<13;a++){
-    $("#displayArray").append('<div class="grid">'+testArray[0]+"</div>");
-    };
-
-
-
-
     var inputNumber = parseInt($("input#numbers").val());
     makeNumberList(inputNumber);
     find15();
