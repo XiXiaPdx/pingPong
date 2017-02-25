@@ -13,14 +13,24 @@ var makeNumberList = function (number) {
 };
 
 //After finding multiples and modifying resultArray, this will display it in grid format. Each array element is a 18% width div that floats left.  Number and ping, pong, ping-pong are added. Colors for certain grids are different based on class control.
+
+//late addition: div's display in staggered timing!
 var displayNumberList = function (list) {
   $("#displayArray").empty();
   $("#numberList").trigger("reset");
-  for (var j=0; j<list.length; j++){
-    var numberToScreen = list[j][0];
-    var gridClass= list[j][1];
-    var originalNumber = '<span class="original">'+(j+1)+"</span>"
-    $("#displayArray").append(gridClass+" "+numberToScreen+"</div>").hide().fadeIn();
+  var j =0;
+  var id = setInterval(function(){ writehello() }, 75);
+  var writehello = function (){
+  if (j===list.length) {
+      clearInterval(id);
+    }
+  else { var numberToScreen = list[j][0];
+      var gridClass= list[j][1];
+      var originalNumber = '<span class="original">'+(j+1)+"</span>"
+      $("#displayArray").append(gridClass+" "+numberToScreen+"</div>").slideDown();
+      j++;
+
+    }
   };
 };
 
@@ -46,10 +56,19 @@ var findMultiples = function (){
   };
 };
 
+
+
+
+
 //front end logic
 $(document).ready(function (){
   $("#numberList").submit(function(event) {
     event.preventDefault();
+
+
+
+
+
     var inputNumber = parseInt($("input#numbers").val());
     makeNumberList(inputNumber);
     findMultiples();

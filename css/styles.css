@@ -8,6 +8,17 @@ body {
   background: black;
 }
 
+.test {
+  background-color: green;
+  color: white;
+}
+
+.test2 {
+  background-color: green;
+  width: 60px;
+  height: 60px;
+}
+
 .container {
   background: #2f5472;
   margin-top: 10%;
