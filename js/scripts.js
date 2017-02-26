@@ -46,7 +46,7 @@ var findMultiples = function (){
       resultArray[j].splice(1,1,'<div class="grid gridPong">');
     }
     else if(Number.isInteger((resultArray[j][0])/3)) {
-      resultArray[j].splice(0,1,'<span class="pingPong">'+"pong"+'</span>');
+      resultArray[j].splice(0,1,'<span class="pingPong">'+"ping"+'</span>');
       resultArray[j].splice(1,1,'<div class="grid gridPing">');
     }
     else  {
@@ -56,19 +56,10 @@ var findMultiples = function (){
   };
 };
 
-
-
-
-
 //front end logic
 $(document).ready(function (){
   $("#numberList").submit(function(event) {
     event.preventDefault();
-
-
-
-
-
     var inputNumber = parseInt($("input#numbers").val());
     makeNumberList(inputNumber);
     findMultiples();

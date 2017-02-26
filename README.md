@@ -67,7 +67,7 @@ Ensure that there is a browser installed, ensure you have a link to github portf
 
 ## Known Bugs
 
-None known at this time.
+The results do not dispay on Safari browser. 2/25/17
 
 ## Support and contact details
 
