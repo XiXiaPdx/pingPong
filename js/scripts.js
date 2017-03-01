@@ -1,68 +1,60 @@
-//global variables
+//business Logic
 var resultArray = [];
-var testArray =[""];
-
-//business logic
-
-//takes initial number and makes it into an array list. Each array element is an array of 2. Index zero is the number, index 1 will contact the grid display control class.
-var makeNumberList = function (number) {
+//takes initial number and makes it into an array list.
+var makeNumberList = function (number){
   resultArray=[];
-  for (var i=1; i<=number; i++) {
-    resultArray.push([i,'<div class="grid">']);
+  for (var i=1; i<=number; i++){
+    resultArray.push(i);
   }
 };
-
-//After finding multiples and modifying resultArray, this will display it in grid format. Each array element is a 18% width div that floats left.  Number and ping, pong, ping-pong are added. Colors for certain grids are different based on class control.
-
-//late addition: div's display in staggered timing!
-var displayNumberList = function (list) {
-  $("#displayArray").empty();
-  $("#numberList").trigger("reset");
-  var j =0;
-  var id = setInterval(function(){ writehello() }, 75);
-  var writehello = function (){
-  if (j===list.length) {
-      clearInterval(id);
-    }
-  else { var numberToScreen = list[j][0];
-      var gridClass= list[j][1];
-      var originalNumber = '<span class="original">'+(j+1)+"</span>"
-      $("#displayArray").append(gridClass+" "+numberToScreen+"</div>").slideDown();
-      j++;
-
-    }
-  };
-};
-
-//The results array is processed for first multiples of 15, then 5, then 3, and finally if not a multiple, modified with span element to control text display.
-var findMultiples = function (){
+//The results array is processed for first multiples of 15, then 5, then 3.
+var findMultiples = function(){
   for (var j=0; j<resultArray.length; j++){
-    if (Number.isInteger((resultArray[j][0])/15)) {
-      resultArray[j].splice(0,1,'<span class="pingPong">'+"ping-pong"+'</span>');
-      resultArray[j].splice(1,1,'<div class="grid gridPingPong">');
+    if (Number.isInteger((resultArray[j])/15)){
+      resultArray.splice(j,1,"ping-pong");
     }
-    else if(Number.isInteger((resultArray[j][0])/5)) {
-      resultArray[j].splice(0,1,'<span class="pingPong">'+"pong"+'</span>');
-      resultArray[j].splice(1,1,'<div class="grid gridPong">');
+    else if (Number.isInteger((resultArray[j])/5)){
+      resultArray.splice(j,1,"pong");
     }
-    else if(Number.isInteger((resultArray[j][0])/3)) {
-      resultArray[j].splice(0,1,'<span class="pingPong">'+"ping"+'</span>');
-      resultArray[j].splice(1,1,'<div class="grid gridPing">');
-    }
-    else  {
-      resultArray[j].splice(0,1,'<span class="original">'+resultArray[j][0]+'</span>');
-      resultArray[j].splice(1,1,'<div class="grid">');
+    else if (Number.isInteger((resultArray[j])/3)){
+      resultArray.splice(j,1,"ping");
     }
   };
 };
-
 //front end logic
-$(document).ready(function (){
-  $("#numberList").submit(function(event) {
+$(document).ready(function(){
+  $("#numberList").submit(function(event){
     event.preventDefault();
     var inputNumber = parseInt($("input#numbers").val());
     makeNumberList(inputNumber);
     findMultiples();
-    displayNumberList(resultArray);
+    //display area and submit form are cleared.
+    $("#displayArray").empty();
+    $("#numberList").trigger("reset");
+    //use SetInterval to stagger display of results
+    var id = setInterval(function(){showNumber()}, 75);
+    var j =0;
+    var showNumber = function(){
+      var numberToScreen = resultArray[j];
+      if (j===resultArray.length){
+          clearInterval(id);
+      }
+      else if (resultArray[j]==="ping"){
+          $("#displayArray").append('<div class="grid gridPing notNumber">'+numberToScreen+"</div>").slideDown();
+          j++;
+      }
+      else if (resultArray[j]==="pong"){
+          $("#displayArray").append('<div class="grid gridPong notNumber">'+numberToScreen+"</div>").slideDown();
+          j++;
+      }
+      else if (resultArray[j]==="ping-pong"){
+          $("#displayArray").append('<div class="grid gridPingPong notNumber">'+numberToScreen+"</div>").slideDown();
+          j++;
+      }
+      else {
+          $("#displayArray").append('<div class="grid">'+'<span class="original">'+numberToScreen+"</span></div>").slideDown();
+          j++;
+      }
+    };
   });
 });
